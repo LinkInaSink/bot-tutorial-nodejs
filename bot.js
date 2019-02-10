@@ -1,27 +1,31 @@
-var HTTPS = require('https');
-var cool = require('cool-ascii-faces');
+'use strict';
 
-var botID = process.env.BOT_ID;
+require('dotenv').config();
 
-function respond() {
-  var request = JSON.parse(this.req.chunks[0]),
-      static checkMessage(message) {
+const https = require('https');
+
+class Bot {
+    /**
+     * Called when the bot receives a message.
+     *
+     * @static
+     * @param {Object} message The message data incoming from GroupMe
+     * @return {string}
+     */
+    static checkMessage(message) {
         const messageText = message.text;
-if (messageText && botRegex.test(messageText)) {
-            // Check is successful, return a message!
-return "Hey There!";
-      botRegex = /^\/tlc$/;
 
-  if(request.text && botRegex.test(request.text)) {
-    this.res.writeHead(200);
-    postMessage();
-    this.res.end();
-  } else {
-    console.log("don't care");
-    this.res.writeHead(200);
-    this.res.end();
-  }
-}
+        // Learn about regular expressions in JavaScript: https://developer.mozilla.org/docs/Web/JavaScript/Guide/Regular_Expressions
+        const botRegex = /^\/tlc/;
+
+        // Check if the GroupMe message has content and if the regex pattern is true
+        if (messageText && botRegex.test(messageText)) {
+            // Check is successful, return a message!
+            return "Hey There";
+        }
+
+        return null;
+};
 
 function postMessage() {
   var botResponse, options, body, botReq;
