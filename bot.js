@@ -5,6 +5,11 @@ var botID = process.env.BOT_ID;
 
 function respond() {
   var request = JSON.parse(this.req.chunks[0]),
+      static checkMessage(message) {
+        const messageText = message.text;
+if (messageText && botRegex.test(messageText)) {
+            // Check is successful, return a message!
+return "Hey There!";
       botRegex = /^\/tlc$/;
 
   if(request.text && botRegex.test(request.text)) {
